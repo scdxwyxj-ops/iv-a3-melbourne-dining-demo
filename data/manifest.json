@@ -1,0 +1,103 @@
+{
+  "snapshot_date": "2026-10-11",
+  "publisher": "City of Melbourne",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source_downloads": [
+    {
+      "file": "dining_2024_raw.csv",
+      "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/cafes-and-restaurants-with-seating-capacity/exports/csv?where=census_year%3Ddate%272024-01-01%27",
+      "publisher": "City of Melbourne",
+      "license": "CC BY 4.0",
+      "downloaded_at": "2026-10-11T02:35:33.826251+00:00",
+      "sha256": "52cba879969f144404c9a38951e166c05fd7c8178b4511033bcfb0d7ef2ee824",
+      "bytes": 810951
+    },
+    {
+      "file": "landmarks_raw.json",
+      "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/landmarks-and-places-of-interest-including-schools-theatres-health-services-spor/exports/json",
+      "publisher": "City of Melbourne",
+      "license": "CC BY 4.0",
+      "downloaded_at": "2026-10-11T02:35:33.683437+00:00",
+      "sha256": "4ddc717ede236054dfffa9e634b440676a7a93dc5ef2cfa1c72631e10b2e5232",
+      "bytes": 43048
+    },
+    {
+      "file": "clue_areas_raw.geojson",
+      "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/small-areas-for-census-of-land-use-and-employment-clue/exports/geojson",
+      "publisher": "City of Melbourne",
+      "license": "CC BY 4.0",
+      "downloaded_at": "2026-10-11T02:35:33.682077+00:00",
+      "sha256": "6fd9c7bff15764088c334542d14be76962fd4ca077773e07a70269c80341f1d3",
+      "bytes": 67259
+    }
+  ],
+  "cleaning": {
+    "dining_year": 2024,
+    "industry_codes": [
+      "4511",
+      "4512"
+    ],
+    "venue_key": [
+      "census_year",
+      "property_id",
+      "normalized trading_name",
+      "normalized business_address"
+    ],
+    "normalization": "Trim, casefold, collapse whitespace; original display text retained.",
+    "seat_handling": "Pivot indoor/outdoor rows into columns; missing type is unknown, represented as blank, not zero.",
+    "landmarks": "All 242 source records retained. Stable IDs added and coordinates flattened. Not an exhaustive tourism inventory.",
+    "boundaries": "All 13 source geometries and properties retained, no simplification.",
+    "distance": "Haversine straight-line distance; Earth radius 6371008.8 m, not walking distance."
+  },
+  "audit": {
+    "raw_dining_rows": 3249,
+    "selected_seating_rows": 2893,
+    "venues": 1994,
+    "category_counts": {
+      "4512": 349,
+      "4511": 1645
+    },
+    "area_counts": {
+      "North Melbourne": 89,
+      "Melbourne (CBD)": 1181,
+      "Kensington": 31,
+      "Carlton": 211,
+      "Melbourne (Remainder)": 36,
+      "East Melbourne": 31,
+      "Parkville": 36,
+      "South Yarra": 9,
+      "West Melbourne (Residential)": 43,
+      "Docklands": 174,
+      "West Melbourne (Industrial)": 2,
+      "Southbank": 135,
+      "Port Melbourne": 16
+    },
+    "landmark_records": 242,
+    "clue_areas": 13,
+    "missing_coordinates": 0,
+    "merge_key_conflicts": 0,
+    "repeated_seating_types": 0,
+    "unique_coordinate_pairs": 1133,
+    "federation_square_600m": 303,
+    "state_library_600m": 619,
+    "shared_600m": 65
+  },
+  "files": [
+    {
+      "file": "venues.csv",
+      "bytes": 329451,
+      "sha256": "880233c298fdf6042d95f32f7a9bbcfe7981ebfc4ad2e01840de8184d1ae4d99"
+    },
+    {
+      "file": "landmarks.csv",
+      "bytes": 27858,
+      "sha256": "30fa14df0ce00518c838b55d6b0cdb419c0885f1f04e0b63c959ca90d278b828"
+    },
+    {
+      "file": "clue_areas.geojson",
+      "bytes": 172630,
+      "sha256": "1c5518ec91471d7d06d02a48ecdc15f3fab670a54aead4c06325f1d892456c4d"
+    }
+  ]
+}

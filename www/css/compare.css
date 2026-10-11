@@ -1,0 +1,3 @@
+/* Feature 3 styles. Owner to be assigned. */
+.compare-layout .comparison-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.compare-layout .comparison-metrics .metric-value { font-size: 34px; }
