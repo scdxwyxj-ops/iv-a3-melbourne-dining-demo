@@ -1,27 +1,27 @@
-# 模块责任与课程交付
+# Module responsibilities and course deliverables
 
-四个功能模块分别维护，公共核心由集成负责人维护。当前模块负责人记录如下，未分配项保留为空缺。
+Each feature module has its own maintenance responsibility. Integration of the shared core is a separate responsibility. Current owners are listed below; unassigned roles remain vacant.
 
-## 责任表
+## Responsibility table
 
-| 模块 | 负责人 | 主要文件 | 功能范围 |
+| Module | Owner | Main files | Feature scope |
 |---|---|---|---|
-| 区域餐饮概览 | 未分配 | `R/modules/area/`、`www/css/area.css` | 区域地图、选区与餐饮概览、Tableau 图表 |
-| 景点周边探索 | Jun Xu | `R/modules/nearby/`、`www/css/nearby.css` | 景点和半径选择、地图与附近列表、场所选择 |
-| 双景点对比 | 未分配 | `R/modules/compare/`、`www/css/compare.css` | 同条件比较、类别图表、重叠识别 |
-| 地点详情与收藏 | 未分配 | `R/modules/shortlist/`、`www/css/shortlist.css` | 详情、收藏管理、CSV 导出 |
-| 公共核心集成 | 未分配 | `app.R`、`R/core/`、`www/css/common.css` | 模块接口、统一样式、依赖与整体集成 |
+| Area overview | Unassigned | `R/modules/area/`, `www/css/area.css` | Area map, area selection, dining overview, and Tableau chart |
+| Nearby dining | Jun Xu | `R/modules/nearby/`, `www/css/nearby.css` | Landmark and radius selection, map, nearby list, and venue selection |
+| Landmark comparison | Unassigned | `R/modules/compare/`, `www/css/compare.css` | Comparison with matching scope, category charts, and overlap identification |
+| Venue details and shortlist | Unassigned | `R/modules/shortlist/`, `www/css/shortlist.css` | Venue details, shortlist management, and CSV export |
+| Shared core integration | Unassigned | `app.R`, `R/core/`, `www/css/common.css` | Module interfaces, shared styles, dependencies, and application integration |
 
-## 模块协作
+## Module collaboration
 
-各模块读取公共 `data` 对象，通过 `state` 传递选择和收藏 ID。接口约定见[架构说明](ARCHITECTURE.md)。区域概览的 Tableau 工作簿目录为 `tableau/`。
+Modules read the shared `data` object and exchange selection and shortlist IDs through `state`. Interfaces are documented in the [architecture notes](ARCHITECTURE.md). The area overview's Tableau workbook directory is `tableau/`.
 
-数据口径变更影响全部模块，变更说明需记录受影响字段与统计结果。公共组件或共享状态字段调整后，同步更新接口文档及相关模块。模块内不另行下载或清洗数据。
+Changes to data definitions affect all modules. Record the affected fields and counts when making such changes. Changes to shared components or state fields require updates to the interface documentation and affected modules. Modules do not download or clean data independently.
 
-## 课程要求与交付
+## Course requirements and deliverables
 
-项目属于 GEOM90007 Information Visualisation Assignment 3，Group 26。最终界面需基于 R Shiny，并按课程 8.5 方法集成至少一个 Tableau 可视化。四个模块组成同一应用，保持一致的视觉与操作方式。
+The project is part of GEOM90007 Information Visualisation Assignment 3, Group 26. The final interface must use R Shiny and incorporate at least one Tableau visualisation using the methods from course section 8.5. The four modules form one application with consistent visuals and interactions.
 
-Part A 与 Part B 的截止时间为 2026 年 11 月 3 日 23:59，Australia/Sydney（AEDT）。Part A 提交包含应用和运行所需数据的 ZIP，报告 PDF 单独提交。
+Parts A and B are due on 3 November 2026 at 23:59, Australia/Sydney (AEDT). Part A requires a ZIP containing the application and all data needed to run it. The report PDF is submitted separately.
 
-官方说明见 [Part A](https://canvas.lms.unimelb.edu.au/courses/241878/assignments/617019) 和 [Week 8.5 Tableau 与 Shiny 集成](https://canvas.lms.unimelb.edu.au/courses/241878/pages/8-dot-5-pre-lab-tasks-integrating-tableau-into-shiny)，需要相应的 Canvas 访问权限。
+Official instructions are available in [Part A](https://canvas.lms.unimelb.edu.au/courses/241878/assignments/617019) and [Week 8.5 Tableau and Shiny integration](https://canvas.lms.unimelb.edu.au/courses/241878/pages/8-dot-5-pre-lab-tasks-integrating-tableau-into-shiny). Access requires the appropriate Canvas permissions.

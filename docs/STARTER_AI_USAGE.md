@@ -1,31 +1,31 @@
-# AI 使用声明
+# AI use statement
 
-2026 年 10 月 11 日，OpenAI Codex 辅助生成初始 Shiny 骨架，并整理数据快照和项目文档。
+On 11 October 2026, OpenAI Codex assisted with the initial Shiny scaffold, data snapshot preparation, and project documentation.
 
-## 使用范围
+## Scope of use
 
-| 内容 | AI 辅助范围 |
+| Content | AI assistance |
 |---|---|
-| 应用骨架 | 四个 Shiny 模块、公共组件、会话状态与数据读取函数 |
-| 样式 | 公共配色、卡片布局与模块 CSS |
-| 地理计算 | Haversine 直线距离与半径内场所查询 |
-| 数据快照 | 类别筛选、室内外座位记录合并、格式转换及来源清单 |
-| 文档 | README、接口说明、设计规范、责任表与接入说明 |
+| Application scaffold | Four Shiny modules, shared components, session state, and data loading functions |
+| Styles | Shared colours, card layouts, and module CSS |
+| Geographic calculations | Haversine straight-line distances and queries for venues within a radius |
+| Data snapshot | Category filtering, indoor and outdoor seating record merging, format conversion, and source manifest |
+| Documentation | READMEs, interface notes, design guidelines, responsibility table, integration notes, and English translation |
 
-项目文档按公开仓库读者的使用需要编写，中文成稿使用 `lieflat-less-ai-tone` 技能检查措辞。该检查只处理技能列出的写作问题。
+The documentation is written for public repository readers. Earlier Chinese drafts were reviewed with the `lieflat-less-ai-tone` skill, which checks only the writing issues listed in that skill. Repository documentation is now maintained in English.
 
-## 验证记录
+## Verification record
 
-餐饮数据核对了原始 3,249 行、所选 2,893 条座位记录和合并后的 1,994 个场所。600 米半径下，Federation Square 与 State Library Victoria 分别包含 303 和 619 个场所，交集为 65 个。数据检查结果和文件 SHA-256 记录于 `data/manifest.json`。
+Dining data checks covered the 3,249 original rows, 2,893 selected seating records, and 1,994 merged venues. At a 600-metre radius, Federation Square and State Library Victoria contain 303 and 619 venues respectively, with 65 shared venues. Data checks and file SHA-256 values are recorded in `data/manifest.json`.
 
-Shiny 骨架验证了数据加载、控件响应和会话状态隔离。浏览器检查覆盖四页切换与数字预览，也检查了禁用占位按钮及窄窗口布局。运行时未出现 JavaScript 错误。全新 GitHub 克隆可直接加载应用，无需处理原始数据。
+The Shiny scaffold was checked for data loading, control responses, and session state isolation. Browser checks covered navigation across four pages, count previews, disabled placeholder buttons, and narrow-window layouts. No JavaScript errors were observed. A fresh GitHub clone loads the application without processing raw data.
 
-文档中的数据读取示例可在项目根目录运行，见[数据说明](../data/README.md)。
+The data loading examples can be run from the repository root; see the [data documentation](../data/README.md).
 
-## 实现与引用状态
+## Implementation and attribution status
 
-当前地图与图表仍为占位，收藏交互未实现，也未开展用户研究。AI 生成内容不构成已完成的 Tableau 集成或用户评估。
+Maps and charts remain placeholders, shortlist interactions are not implemented, and no user research has been conducted. AI-generated content does not establish completed Tableau integration or user evaluation.
 
-Tableau 集成参考 Alan Thomas 的课程示例（September 2024），当前应用未复制该集成库。后续使用课程或外部代码时，应记录作者、来源和改动。
+Tableau integration references Alan Thomas's course examples (September 2024). The current application does not copy that integration library. Future use of course or external code should record its author, source, and modifications.
 
-最终课程提交仍需按作业要求，在代码、界面或设计报告的适当位置声明 AI 与外部材料的使用。本声明记录初始版本的使用范围，后续开发应补充实际新增内容。
+The final course submission must still acknowledge AI and external materials in an appropriate location in the code, interface, or design report, as required by the assignment. This statement records the initial version's scope of use and should be updated for subsequent work.

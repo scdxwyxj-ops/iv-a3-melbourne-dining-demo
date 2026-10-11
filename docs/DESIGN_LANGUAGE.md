@@ -1,52 +1,52 @@
-# 公共设计语言
+# Shared design language
 
-界面采用浅色背景与白色卡片。桌面布局中，左侧放置控件，中间预留地图，右侧显示摘要或结果。公共样式定义于 `www/css/common.css`，各模块的调整位于对应 CSS 文件。
+The interface uses a light background and white cards. On desktop layouts, controls sit on the left, the map region occupies the centre, and summaries or results appear on the right. Shared styles are defined in `www/css/common.css`; module adjustments use their corresponding CSS files.
 
-## 颜色
+## Colours
 
-| CSS token | 色值 | 用途 |
+| CSS token | Value | Purpose |
 |---|---|---|
-| `--color-primary` | `#087f80` | 主操作、咖啡馆与餐厅、比较 A |
-| `--color-secondary` | `#7961b0` | 比较 B 与重叠说明 |
-| `--color-takeaway` | `#db8950` | 外卖类别的标记 |
-| `--color-text` | `#203b36` | 正文与标题 |
-| `--color-muted` | `#657970` | 辅助说明 |
-| `--color-background` | `#f6f8f6` | 页面背景 |
-| `--color-surface` | `#ffffff` | 卡片背景 |
-| `--color-border` | `#dce6e0` | 卡片和控件边框 |
+| `--color-primary` | `#087f80` | Primary actions, cafes and restaurants, and comparison A |
+| `--color-secondary` | `#7961b0` | Comparison B and overlap summaries |
+| `--color-takeaway` | `#db8950` | Takeaway category markers |
+| `--color-text` | `#203b36` | Body text and headings |
+| `--color-muted` | `#657970` | Supporting text |
+| `--color-background` | `#f6f8f6` | Page background |
+| `--color-surface` | `#ffffff` | Card background |
+| `--color-border` | `#dce6e0` | Card and control borders |
 
-类别颜色在四页保持一致。比较 A/B 同时显示文字标签；橙色用于外卖标记，正文和按钮使用公共文字色与主色。
+Category colours stay consistent across all four pages. Comparisons also label A and B in text. Orange marks takeaway venues; body text and buttons use the shared text and primary colours.
 
-## 字体与布局
+## Typography and layout
 
-字体使用 Arial 与系统 sans-serif。页面标题 25px，卡片标题 15px，正文默认 14px，说明文字 12px。指标数字默认 42px，比较双列卡片为 34px。
+The font stack uses Arial and system sans-serif fonts. Page headings are 25px, card headings 15px, body text 14px, and supporting text 12px. Metric values are 42px, or 34px in the two-column comparison cards.
 
-卡片圆角 12px，控件圆角 7px，卡片间距 16px，内边距 20px。桌面布局的控件栏宽 235px，摘要栏宽 310px，中间地图区域自适应。较窄窗口折叠为两列或单列。
+Cards have a 12px corner radius, with 7px for controls. Card spacing is 16px and padding is 20px. The desktop control column is 235px wide, the summary column is 310px, and the map column fills the remaining space. Narrower windows use two columns or one column.
 
-## 公共组件
+## Shared components
 
-| 组件 | 内容约定 |
+| Component | Content convention |
 |---|---|
-| `feature_heading()` | 页面任务标题、简短描述、占位状态和负责人 |
-| `panel_card()` | 单一用途的卡片，标题使用 h2 |
-| `placeholder_canvas()` | 明确标记待实现区域，不绘制虚构地图或数据点 |
-| `metric_card()` | 数字、单位或对象、必要的口径说明 |
-| `category_legend()` | 固定的两类餐饮图例 |
-| `next_step_note()` | 占位版的开发提示；正式用户界面中移除 |
+| `feature_heading()` | Task title, short description, placeholder status, and owner |
+| `panel_card()` | A card with one purpose and an h2 heading |
+| `placeholder_canvas()` | An explicitly labelled implementation area with no invented map or data points |
+| `metric_card()` | A value, its unit or subject, and any required scope note |
+| `category_legend()` | The fixed legend for the two dining categories |
+| `next_step_note()` | Development notes for the placeholder version; remove from the final user interface |
 
-## 界面文字与交互
+## Interface text and interactions
 
-界面使用英文，协作文档使用中文。页面标题说明当前任务，控件保留可见标签。
+The interface and repository documentation use English. Page headings describe the current task, and controls retain visible labels.
 
-- 场所数量使用一店一行的记录，不能数座位行或不同坐标。
-- 半径单位使用 metres，距离描述为 straight-line。
-- 座位缺失显示 Unknown，数据实际为 0 时显示 0。
-- 零结果显示空状态，并提示调整景点或范围。
-- 未实现的按钮禁用，并标记 coming next。
-- 店名和地址作为普通文本输出，避免将未经转义的源数据拼入 HTML。
+- Count venues using the one-venue-per-row records, not seating rows or distinct coordinates.
+- Use metres for radius units and straight-line for distance descriptions.
+- Display missing seating as Unknown; display 0 when the recorded value is zero.
+- Show an empty state for zero results and suggest adjusting the landmark or radius.
+- Disable unimplemented buttons and label them coming next.
+- Render venue names and addresses as plain text. Avoid inserting unescaped source data into HTML.
 
-地图需配有图例和调查年份说明。同坐标的多个场所应保留独立身份，距离不描述为步行路线。
+Maps require a legend and a census year note. Venues with shared coordinates retain separate identities. Distances are not described as walking routes.
 
-## 图表口径
+## Chart scope
 
-比较图表使用相同的类别顺序和刻度。场所数量不标为密度；图表筛选与页面控件使用一致的数据范围。Tableau 接入约定见[工作簿说明](../tableau/README.md)。
+Comparison charts use the same category order and scale. Venue counts are not labelled as density. Chart filters and page controls use the same data scope. See the [workbook notes](../tableau/README.md) for Tableau integration conventions.

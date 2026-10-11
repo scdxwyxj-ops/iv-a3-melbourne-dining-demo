@@ -1,19 +1,19 @@
-# 数据快照
+# Data snapshot
 
-本目录提供应用可直接读取的餐饮、兴趣点和 CLUE 分区数据。快照整理日期为 2026 年 10 月 11 日；餐饮数据的调查年份为 2024 年。整理日期不代表各数据集的调查或更新时间。
+This directory contains dining, place-of-interest, and CLUE area data that the application can read directly. The snapshot was prepared on 11 October 2026; the dining census year is 2024. The preparation date is not the survey or update date of each source dataset.
 
-## 文件与读取
+## Files and loading
 
-| 文件 | 记录单位与规模 | 用途 |
+| File | Record unit and size | Purpose |
 |---|---|---|
-| `venues.csv` | 1,994 个餐饮场所，每行一个场所 | 餐饮位置、类别与座位属性 |
-| `landmarks.csv` | 242 条兴趣点记录 | 景点候选与起点坐标 |
-| `clue_areas.geojson` | 13 个 CLUE 分区 | 区域边界与分区名称 |
-| `manifest.json` | 来源、转换规则、计数与 SHA-256 | 快照说明与文件一致性检查 |
+| `venues.csv` | 1,994 dining venues, one venue per row | Venue locations, categories, and seating attributes |
+| `landmarks.csv` | 242 place-of-interest records | Landmark candidates and origin coordinates |
+| `clue_areas.geojson` | 13 CLUE areas | Area boundaries and names |
+| `manifest.json` | Sources, transformations, counts, and SHA-256 checksums | Snapshot description and file integrity checks |
 
-CSV 使用 UTF-8 编码和逗号分隔。GeoJSON 保留源数据的几何与属性。目录分发的是处理后的固定快照，原始导出和处理脚本未包含在仓库中。
+CSV files use UTF-8 encoding and comma delimiters. The GeoJSON retains the source geometries and properties. The repository distributes a fixed, processed snapshot; raw exports and processing scripts are not included.
 
-在项目根目录的 R 控制台读取：
+Run the following in an R console from the repository root:
 
 ```r
 source("R/core/data.R")
@@ -23,47 +23,47 @@ nrow(data$landmarks)    # 242
 length(data$boundaries$features)  # 13
 ```
 
-`load_app_data()` 检查必需字段、ID 唯一性、坐标、数据范围及记录数，并核对餐饮分区名称与边界名称。文件 SHA-256 保存在 `manifest.json`，供单独检查文件一致性；加载函数不会自动校验 SHA-256。
+`load_app_data()` checks required fields, unique IDs, coordinates, data scope, and record counts. It also checks that venue area names match boundary names. File checksums are stored in `manifest.json` for separate integrity checks; the loader does not automatically verify SHA-256 values.
 
-## 餐饮记录的处理
+## Dining record processing
 
-2024 年原始导出包含 3,249 行。筛选 ANZSIC 4511（Cafes and Restaurants）与 4512（Takeaway Food Services）后，保留 2,893 条座位记录。源数据可能将同一场所的室内、室外座位分别记录。
+The original 2024 export contains 3,249 rows. Filtering to ANZSIC 4511 (Cafes and Restaurants) and 4512 (Takeaway Food Services) retains 2,893 seating records. The source may record indoor and outdoor seating for the same venue in separate rows.
 
-场所合并键由调查年、`property_id`、规范化店名和营业地址组成。规范化用于合并与生成稳定 ID，包括去除首尾空白、折叠连续空白及忽略大小写；显示店名和地址保留原始文字。
+The venue merge key consists of the census year, `property_id`, normalised trading name, and business address. Normalisation trims leading and trailing whitespace, collapses repeated whitespace, and ignores case. It is used for merging and stable ID generation; display names and addresses retain their source text.
 
-合并结果为 1,994 个场所，其中咖啡馆与餐厅 1,645 个，外卖 349 个。室内外座位转为两个字段。未记录的座位类型保留空值，不能按零座位解释。
+The merged snapshot contains 1,994 venues: 1,645 cafes and restaurants, and 349 takeaway venues. Indoor and outdoor seating are stored in separate columns. An unrecorded seating type remains missing and must not be interpreted as zero seats.
 
-合并组内的类别、坐标与分区一致。所选记录没有重复座位类型或缺失坐标。
+Category, coordinates, and area are consistent within each merge group. The selected records contain no repeated seating types within a group or missing coordinates.
 
-## 餐饮字段
+## Venue fields
 
-| 字段 | 含义与读取约定 |
+| Field | Meaning and loading convention |
 |---|---|
-| `venue_id` | 稳定字符 ID，用于场所关联和跨页面选择 |
-| `census_year` | 调查年份，当前为 2024 |
-| `property_id` | 来源属性 ID，按字符读取 |
-| `name`、`address` | 原始店名和营业地址 |
-| `area` | CLUE 分区名称，对应 GeoJSON 的 `featurenam` |
-| `category_code` | 字符代码 4511 或 4512 |
-| `category` | 展示类别名称 |
-| `longitude`、`latitude` | 十进制度的经度与纬度 |
-| `indoor_seats`、`outdoor_seats` | 记录中的座位数，空值表示未知 |
+| `venue_id` | Stable character ID for joins and cross-page venue selection |
+| `census_year` | Census year, currently 2024 |
+| `property_id` | Source property ID, loaded as character |
+| `name`, `address` | Source trading name and business address |
+| `area` | CLUE area name, matching the GeoJSON `featurenam` property |
+| `category_code` | Character code 4511 or 4512 |
+| `category` | Category display label |
+| `longitude`, `latitude` | Longitude and latitude in decimal degrees |
+| `indoor_seats`, `outdoor_seats` | Recorded seat counts; missing values mean unknown |
 
-`load_app_data()` 将年份、坐标和座位字段转为数值，其他字段保留为字符。
+`load_app_data()` converts year, coordinate, and seating columns to numeric values. Other columns remain character values.
 
-## 兴趣点与分区
+## Places of interest and areas
 
-`landmarks.csv` 保留源数据的全部 242 条记录，加入稳定的 `poi_id`，并将嵌套坐标展开。字段为 `poi_id`、`name`、`theme`、`sub_theme`、`longitude`、`latitude`。
+`landmarks.csv` retains all 242 source records, adds a stable `poi_id`, and flattens the nested coordinates. Its fields are `poi_id`, `name`, `theme`, `sub_theme`, `longitude`, and `latitude`.
 
-兴趣点包含学校等非旅游设施，数据集不构成完整的旅游景点清单。初始界面显示六个候选，由 `R/core/data.R` 中的 `landmark_choices()` 定义。
+The dataset includes non-tourism facilities such as schools and is not a complete inventory of tourist attractions. The initial interface shows six candidates, defined by `landmark_choices()` in `R/core/data.R`.
 
-CLUE 是 Census of Land Use and Employment 的简称。`clue_areas.geojson` 保留 13 个统计分区，几何未简化。分区覆盖 City of Melbourne 的多个区域，不限于 CBD，也不等同于所有 suburb 边界。
+CLUE stands for Census of Land Use and Employment. `clue_areas.geojson` retains 13 statistical areas without simplifying their geometry. These areas cover multiple parts of the City of Melbourne, beyond the CBD, and are not equivalent to all suburb boundaries.
 
-## 距离与数据限制
+## Distances and limitations
 
-GeoJSON 坐标顺序为 longitude、latitude。`venues_near()` 使用 Haversine 直线距离和 6,371,008.8 米的平均地球半径，返回指定半径内的场所，附加 `distance_m` 并按距离排序。
+GeoJSON coordinates are ordered as longitude, latitude. `venues_near()` uses Haversine straight-line distance with a mean Earth radius of 6,371,008.8 metres. It returns venues within the specified radius, adds `distance_m`, and sorts the results by distance.
 
-600 米半径的核对结果为 Federation Square 303 个场所、State Library Victoria 619 个场所，交集 65 个。计算示例在项目根目录运行：
+At a radius of 600 metres, the checked results are 303 venues around Federation Square, 619 around State Library Victoria, and 65 shared venues. Run this example from the repository root:
 
 ```r
 source("R/core/data.R")
@@ -73,16 +73,16 @@ fed_id <- unname(landmark_choices(data)[["Federation Square"]])
 nrow(venues_near(data, fed_id, radius_m = 600))  # 303
 ```
 
-1,994 个场所对应 1,133 组不同坐标，同一建筑内的多家店可能共享位置。场所关联应使用 `venue_id`，坐标不适合作为去重键，也不代表精确入口。
+The 1,994 venues have 1,133 distinct coordinate pairs. Multiple venues in a building may share a location. Use `venue_id` to identify venues; coordinates are unsuitable as a deduplication key and do not represent exact entrances.
 
-数据未提供营业时间、价格或菜系。餐饮记录为历史快照，直线距离不代表步行路线或行程时间。
+The data does not provide opening hours, prices, or cuisines. Dining records are a historical snapshot. Straight-line distance does not represent a walking route or travel time.
 
-## 来源与许可
+## Sources and licence
 
-三份源数据均由 City of Melbourne 发布，许可为 [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/)。本快照经过类别筛选、记录合并及格式转换，具体规则见上文和 `manifest.json`。
+All three source datasets are published by the City of Melbourne under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). The snapshot applies category filtering, record merging, and format conversion as described above and in `manifest.json`.
 
-- [Cafes and restaurants with seating capacity](https://data.melbourne.vic.gov.au/explore/dataset/cafes-and-restaurants-with-seating-capacity/information/)，使用 2024 年记录。
-- [Landmarks and places of interest](https://data.melbourne.vic.gov.au/explore/dataset/landmarks-and-places-of-interest-including-schools-theatres-health-services-spor/information/)。
-- [Small areas for Census of Land Use and Employment](https://data.melbourne.vic.gov.au/explore/dataset/small-areas-for-census-of-land-use-and-employment-clue/information/)。
+- [Cafes and restaurants with seating capacity](https://data.melbourne.vic.gov.au/explore/dataset/cafes-and-restaurants-with-seating-capacity/information/), using 2024 records.
+- [Landmarks and places of interest](https://data.melbourne.vic.gov.au/explore/dataset/landmarks-and-places-of-interest-including-schools-theatres-health-services-spor/information/).
+- [Small areas for Census of Land Use and Employment](https://data.melbourne.vic.gov.au/explore/dataset/small-areas-for-census-of-land-use-and-employment-clue/information/).
 
-再利用时保留 City of Melbourne 署名，并附上来源、许可链接和变换说明。`manifest.json` 记录原始导出 URL、下载时间、源文件 SHA-256，以及本目录数据文件的 SHA-256。
+Retain City of Melbourne attribution when reusing the data, together with source and licence links and a description of transformations. `manifest.json` records the original export URLs, download times, source file checksums, and checksums for the data files in this directory.
