@@ -55,7 +55,11 @@ Category, coordinates, and area are consistent within each merge group. The sele
 
 `landmarks.csv` retains all 242 source records, adds a stable `poi_id`, and flattens the nested coordinates. Its fields are `poi_id`, `name`, `theme`, `sub_theme`, `longitude`, and `latitude`.
 
-The dataset includes non-tourism facilities such as schools and is not a complete inventory of tourist attractions. The initial interface shows six candidates, defined by `landmark_choices()` in `R/core/data.R`.
+The dataset includes non-tourism facilities such as schools and is not a complete inventory of tourist attractions. `tourism_landmarks(data)` in `R/core/data.R` selects 102 visitor-oriented records from the current snapshot. `landmark_choices(data)` returns their names and original `poi_id` values for dropdown controls. Nearby dining and landmark comparison share this selection.
+
+The selection includes source categories for museums and galleries, theatres, cinemas, parks and gardens, observation towers, aquariums, and bridges. A named inclusion list adds civic and cultural sites, heritage buildings, Queen Victoria Market, Melbourne Zoo, selected major sports venues, and Flinders Street Railway Station. These records have broader source classes that would otherwise also include offices, ordinary sports facilities, shops, or stations. The Richmond Football Club record is explicitly omitted from the park/garden category. The complete category and name rules are kept in `tourism_landmarks()`.
+
+This selection changes interface choices only; all 242 source records remain in `landmarks.csv`. Names and coordinates are retained as supplied. Inclusion does not verify current names, opening status, visitor access, or tours. The original six choices remain available, and Federation Square remains the default starting point.
 
 CLUE stands for Census of Land Use and Employment. `clue_areas.geojson` retains 13 statistical areas without simplifying their geometry. These areas cover multiple parts of the City of Melbourne, beyond the CBD, and are not equivalent to all suburb boundaries.
 

@@ -19,13 +19,15 @@ Input and output IDs in the UI are namespaced with `NS(id)`. Servers use `module
 
 | File | Interfaces and purpose |
 |---|---|
-| `R/core/data.R` | `load_app_data()`, `landmark_choices()`, and `get_landmark()` for shared data loading and validation |
+| `R/core/data.R` | `load_app_data()` for data loading and validation; `tourism_landmarks()`, `landmark_choices()`, and `get_landmark()` for shared landmark selection |
 | `R/core/geo.R` | `haversine_m()` and `venues_near()` for consistent straight-line distance and catchment calculations |
 | `R/core/state.R` | `create_shared_state()` for separate state in each session |
 | `R/core/components.R` | Page headings, cards, metrics, and placeholder regions |
 | `R/core/tableau.R` | `tableau_placeholder()` and the Tableau integration location |
 
 `data$venues` is a data.frame with one venue per row. `data$landmarks` contains place-of-interest records, `data$boundaries` contains the GeoJSON list, and `data$areas` supplies area names. See the [data documentation](../data/README.md) for field definitions.
+
+Modules use `landmark_choices(data)` for the shared visitor-oriented dropdown options. Its interface remains a flat named character vector: display names are keys and original `poi_id` values are values. `tourism_landmarks(data)` returns the corresponding records with their original columns, sorted by name. Both functions use one selection policy in `R/core/data.R`; modules should not copy that policy or replace the full `data$landmarks` table with the subset. Default ID lookups such as `landmark_choices(data)[["Federation Square"]]` remain valid.
 
 ## Shared state
 

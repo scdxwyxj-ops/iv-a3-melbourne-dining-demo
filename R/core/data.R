@@ -35,13 +35,46 @@ load_app_data <- function(directory = "data") {
        areas = sort(unique(venues$area)))
 }
 
-# A starter selection from the source records; not an exhaustive attraction list.
-# The committed landmarks.csv retains all 242 records, including non-tourism places.
+# Visitor-oriented selection over the source snapshot, not a live attractions guide.
+# Selection policy assisted by OpenAI Codex, 2026-10-25.
+# Keep this policy shared: category matches plus named exceptions for broad source
+# classes. No records, names or IDs in landmarks.csv are changed by this view.
+tourism_landmarks <- function(data) {
+  landmarks <- data$landmarks
+  visitor_types <- c(
+    "Place Of Assembly::Art Gallery/Museum",
+    "Place Of Assembly::Theatre Live",
+    "Place Of Assembly::Cinema",
+    "Leisure/Recreation::Informal Outdoor Facility (Park/Garden/Reserve)",
+    "Leisure/Recreation::Observation Tower/Wheel",
+    "Purpose Built::Aquarium",
+    "Transport::Bridge"
+  )
+  # Civic/cultural sites, heritage buildings, a market, a zoo, event venues and
+  # Flinders Street are named explicitly rather than including all offices,
+  # public buildings, sports facilities, shops or railway stations.
+  named_sites <- c(
+    "State Library Victoria", "NGV International", "Conservatory",
+    "Elisabeth Murdoch Hall", "Melbourne Recital Centre", "Sidney Myer Music Bowl",
+    "Melbourne Theatre Company", "Shrine of Remembrance", "Melbourne Town Hall",
+    "Melbourne Zoo", "Queen Victoria Market", "Parliament House",
+    "Old Treasury Building", "Former Royal Mint", "Government House",
+    "St Pauls Cathedral", "St Patricks Cathedral", "Scots Church",
+    "St Michael's Uniting Church", "Melbourne Cricket Ground (MCG)",
+    "Rod Laver Arena", "Melbourne Park", "Hisense Arena", "Etihad Stadium",
+    "AAMI Park", "Margaret Court Arena", "Flinders Street Railway Station"
+  )
+  include <- paste(landmarks$theme, landmarks$sub_theme, sep = "::") %in% visitor_types |
+    landmarks$name %in% named_sites
+  # The source places this club record in the park/garden category.
+  include <- include & !landmarks$name %in% c("Richmond Football Club")
+  selected <- landmarks[include, , drop = FALSE]
+  selected[order(tolower(selected$name), selected$poi_id, method = "radix"), , drop = FALSE]
+}
+
+# Retain the flat name -> poi_id interface used by modules and session defaults.
 landmark_choices <- function(data) {
-  names <- c("Federation Square", "State Library Victoria", "Queen Victoria Market",
-             "Melbourne Museum", "Immigration Museum", "Australian Centre for Contemporary Art")
-  selected <- data$landmarks[match(names, data$landmarks$name), , drop = FALSE]
-  selected <- selected[!is.na(selected$poi_id), , drop = FALSE]
+  selected <- tourism_landmarks(data)
   stats::setNames(selected$poi_id, selected$name)
 }
 
