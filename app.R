@@ -1,8 +1,8 @@
 # GEOM90007 Group 26 starter. Scaffold assisted by OpenAI Codex, 2026-10-11.
-# See docs/STARTER_AI_USAGE.md. Four feature modules are placeholders, not a finished submission.
+# See docs/STARTER_AI_USAGE.md and docs/COMPARE_IMPLEMENTATION.md. Not a finished submission.
 library(shiny)
 
-required_packages <- c("shiny", "jsonlite")
+required_packages <- c("shiny", "jsonlite", "leaflet")
 missing_packages <- required_packages[!vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing_packages)) stop("Install these packages before starting: ", paste(missing_packages, collapse = ", "))
 
@@ -31,7 +31,7 @@ ui <- fluidPage(
   ),
   div(class = "app-shell",
     div(class = "starter-notice", strong("Team starter"),
-      "Four feature placeholders with shared styling and ready-to-use data. Maps, Tableau charts and saved lists are still to be implemented."),
+      "Compare places is available. Other modules, Tableau charts and saved lists remain under development."),
     tabsetPanel(id = "main_nav", type = "pills", selected = "nearby",
       tabPanel("1 · Area overview", value = "area", area_ui("area", app_data)),
       tabPanel("2 · Near a landmark", value = "nearby", nearby_ui("nearby", app_data)),

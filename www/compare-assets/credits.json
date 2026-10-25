@@ -1,0 +1,44 @@
+{
+  "Federation Square": {
+    "file": "landmark-0.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Fed_Square,_Melbourne,_west_view_20230219_1.jpg",
+    "author": "DXR",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "State Library Victoria": {
+    "file": "landmark-1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:State_Library_of_Victoria_-_right_side.jpg",
+    "author": "Diliff",
+    "license": "CC BY 2.5",
+    "license_url": "https://creativecommons.org/licenses/by/2.5"
+  },
+  "Queen Victoria Market": {
+    "file": "landmark-2.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Aerial_photograph_of_Queen_Victoria_Market.jpg",
+    "author": "Bob T",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "Melbourne Museum": {
+    "file": "landmark-3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Melbourne_Museum_2012.JPG",
+    "author": "Owlburrows",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "Immigration Museum": {
+    "file": "landmark-4.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Immigration_Museum,_Melbourne.jpg",
+    "author": "Johntorcasio",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "Australian Centre for Contemporary Art": {
+    "file": "landmark-5.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Australian_Center_of_Contemporary_Art_(ACCA)-_Entrance.JPG",
+    "author": "Robi882002",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  }
+}

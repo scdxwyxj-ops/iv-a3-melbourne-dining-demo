@@ -2,7 +2,7 @@
 
 Melbourne Dining Explorer is an R Shiny prototype for exploring dining options across Melbourne areas and around landmarks. It uses City of Melbourne open data and includes four modules: area overview, nearby dining, landmark comparison, and venue details with a shortlist.
 
-The current version provides page layouts and shared components. Area and landmark catchment counts use the supplied data. Maps and venue lists are placeholders; Tableau charts and shortlist interactions have not been implemented.
+Compare places now includes a catchment map, category bars, filters, overlap lists and venue selection. Other modules remain scaffolded; Tableau and shortlist interactions are not implemented. See [Compare implementation](docs/COMPARE_IMPLEMENTATION.md) for dependencies, checks and integration notes.
 
 ![Placeholder interface for the nearby dining module](docs/preview-nearby.png)
 
@@ -12,14 +12,14 @@ The current version provides page layouts and shared components. Area and landma
 |---|---|---|
 | Area overview | Area selection and venue counts for the selected area | Area map and Tableau overview chart |
 | Nearby dining | Landmark and radius selection, with venue counts within the radius | Map, nearby venue list, and venue selection |
-| Landmark comparison | Counts within the same radius and the number of shared venues | Comparison map and category charts |
+| Landmark comparison | Catchment map, counts, overlap list, category bars, filters and venue selection | Integration with the unfinished details module |
 | Venue details and shortlist | Page layout and an empty shortlist state | Venue details, save and remove actions, and CSV export |
 
 Placeholder regions are labelled in the interface. Save and export buttons remain disabled until their interactions are implemented.
 
 ## Requirements
 
-The application requires R and the `shiny` and `jsonlite` packages. A web browser is required to access the Shiny interface.
+The application requires R and the `shiny`, `jsonlite` and `leaflet` packages. A web browser is required to access the Shiny interface.
 
 The current version has been checked on Ubuntu WSL with R 4.3.3, shiny 1.14.0, and jsonlite 2.0.0. Minimum supported versions have not been established.
 
@@ -37,7 +37,7 @@ cd iv-a3-melbourne-dining-demo
 Before the first run, install the dependencies in an R console:
 
 ```r
-install.packages(c("shiny", "jsonlite"))
+install.packages(c("shiny", "jsonlite", "leaflet"))
 ```
 
 Set the R working directory to the repository root, then start the application:

@@ -1,0 +1,25 @@
+library(shiny)
+for (f in c("data", "geo", "state", "components")) source(file.path("R/core", paste0(f, ".R")))
+source("R/modules/compare/ui.R")
+source("R/modules/compare/server.R")
+d <- load_app_data()
+ui <- as.character(compare_ui("compare", d))
+stopifnot(all(vapply(d$landmarks$poi_id, function(id) grepl(id, ui, fixed = TRUE), logical(1))))
+stopifnot(grepl('data-step="1"', ui, fixed = TRUE), grepl("not Greater Melbourne", ui, fixed = TRUE))
+s <- create_shared_state(d)
+testServer(compare_server, args = list(data = d, state = s), {
+  session$setInputs(radius = 537, category = "all")
+  stopifnot(s$comparison_radius_m == 537, all(result()$a$distance_m <= 537))
+  stopifnot(grepl("tile.openstreetmap.org", output$map, fixed = TRUE))
+  stopifnot(!grepl("compare-maplibre", output$map, fixed = TRUE))
+  for (radius in c(200, 601, 1200)) {
+    session$setInputs(radius = radius)
+    stopifnot(s$comparison_radius_m == radius)
+  }
+  session$setInputs(radius = 1201)
+  stopifnot(s$comparison_radius_m == 1200)
+  extra <- setdiff(d$landmarks$poi_id, unname(landmark_choices(d)))[1]
+  session$setInputs(landmark_a = extra, radius = 537)
+  stopifnot(s$comparison_a_id == extra, nzchar(output$map), length(output$photo_a) > 0)
+})
+cat("PASS: OSM tiles, all landmark choices, metre-step radius, bounds and extra landmark selection.\n")
