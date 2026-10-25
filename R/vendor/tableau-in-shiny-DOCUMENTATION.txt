@@ -1,0 +1,114 @@
+tableau-in-shiny R Library
+Documentation
+
+Alan Thomas, September 2024
+
+---
+
+This library requires the `shinyjs` package. Make sure you have installed it:
+
+install.packages('shinyjs')
+
+---
+
+There are two functions in this library:
+
+1.  tableauPublicViz(id='...', url='...', height='500px', ...)
+
+    Inserts a Tableau Public viz at the given location in your Shiny UI.
+    Use this in the same way that you would use one of the *Output functions,
+    like girafeOutput or textOutput.
+
+    Additional parameters are passed through to the <tableau-viz> element,
+    such as style= for custom CSS styling.
+
+2.  setUpTableauInShiny()
+
+    Outputs the code necessary to initialise and set up Tableau embedding.
+    This should be included somewhere in the UI, preferably in a header
+    of the navbarPage or whatever layout you have chosen for your Shiny UI.
+    See the example scripts.
+
+---
+
+When you place Tableau vizzes on separate tabs or pages of your Shiny
+interface, the vizzes on the second and subsequent tabs sometimes appear
+in the wrong size (too narrow), or do not appear at all.
+
+This can be fixed by performing the following steps:
+
+1.  In your Shiny app's UI, identify the element that allows the user to
+    switch between the tabs or pages. This may be a navbarPage or a
+    tabsetPanel, for example. 
+
+2.  Associate an ID with this UI element by adding an id= parameter to the
+    function. For example:
+
+      navbarPage(
+        id="mynav",
+        ......
+      )
+
+3.  Add the following code to your server function, where mynav is changed
+    to the ID you associated with your UI element:
+
+      observeEvent(input$mynav, {
+        runjs('dispatchEvent(new Event("resize"))')
+      })
+  
+---
+
+The library currently does not contain any "nice" way to send commands to the 
+Tableau viz. You need to write your own JavaScript using the runjs() function.
+
+---
+
+The library does provide a way to receive events from the Tableau viz.
+
+Each Tableau viz comes with three events. Suppose your viz has id='tableauViz'.
+The events are named as follows:
+
+1.  input$tableauViz_mark_selection_changed
+
+    When one or more marks are selected on the Tableau viz, this variable is
+    set to a data frame. Each row of the data frame corresponds to a mark on
+    the Tableau viz, while the columns correspond to the dimensions and
+    measures on the current sheet.
+
+    If the selection is empty (no marks are selected), this variable is set to
+    an empty list. 
+
+    For example, if your Tableau viz has a dimension called "Name", you can
+    access the Name of the selected mark (the first selected mark if more than
+    one) using
+
+      input$tableauViz_mark_selection_changed$Name[1]
+
+    If no mark is selected, this will be NULL.
+
+2.  input$tableauViz_filter_changed
+
+    When a filter is changed on the Tableau viz, this variable is set to a
+    list with the following elements:
+
+    input$tableauViz_filter_changed$fieldName
+        Name of the filter field.
+    input$tableauViz_filter_changed$isAllSelected
+        Is "(All)" selected? TRUE or FALSE.
+    input$tableauViz_filter_changed$appliedValues
+        A list of the value(s) chosen in the filter. If "(All)" is selected,
+        this list will be empty. You can convert this list to a vector using
+        the unlist() function.
+
+3. input$tableauViz_parameter_changed
+
+    When a custom parameter is changed on the Tableau viz, this variable is
+    set to a list with the following elements:
+
+    input$tableauViz_parameter_changed$name
+        Name of the parameter.
+    input$tableauViz_parameter_changed$fieldName
+        Tableau field (code) name for the parameter.
+    input$tableauViz_parameter_changed$value
+        The new value of the parameter.
+
