@@ -1,0 +1,4 @@
+# Copy to .Renviron beside app.R and supply a restricted browser key locally.
+# Never commit the real .Renviron file to GitHub.
+GOOGLE_MAPS_BROWSER_KEY=
+PLACES_SESSION_REQUEST_LIMIT=15
