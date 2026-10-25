@@ -21,17 +21,6 @@ GOOGLE_MAPS_BROWSER_KEY=填入浏览器密钥
 PLACES_SESSION_REQUEST_LIMIT=15
 ```
 
-Google Cloud 项目需有有效计费，启用 **Maps JavaScript API** 和 **Places UI Kit API**。密钥使用网站来源限制，并仅允许这两项 API。本地允许来源：
-
-```text
-http://127.0.0.1:7463/*
-http://localhost:7463/*
-```
-
-不同电脑可以使用相同的本地地址；localhost 限制不是小组成员身份验证。这个版本不读取服务器 Places 密钥或 Google Map ID。云端使用另行配置的部署域名，本次上传不部署或更新云端应用。
-
-Google 查询及详情可能产生费用，计入密钥所属项目。设置合理的 Cloud 配额和预算提醒；预算提醒不是自动停费开关。应用的会话搜索次数限制也不是账单硬上限。
-
 ## 当前功能
 
 - 242 个地标候选，可从下拉搜索或地图选择。
