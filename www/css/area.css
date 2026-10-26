@@ -1,2 +1,25 @@
 /* Feature 1 styles. Keep shared tokens in common.css. Owner to be assigned. */
 .area-layout .placeholder-chart h3 { font-size: 14px; }
+.area-layout { grid-template-columns: minmax(0, 3fr) minmax(424px, 2fr); align-items: stretch; }
+.area-layout .control-panel { grid-column: 1 / -1; display: flex; align-items: flex-end; flex-wrap: wrap; gap: 12px 24px; padding: 14px 20px; }
+.area-layout .control-panel .form-group { margin-bottom: 0; width: 280px; max-width: 100%; }
+.area-layout .control-panel .panel-title { margin-bottom: 0; height: 44px; display: flex; align-items: center; }
+.area-layout .control-panel .selectize-control { margin-bottom: 0; }
+.area-layout .control-panel .selectize-input { height: 44px; min-height: 44px; display: flex; align-items: center; }
+.area-layout .control-panel .action-button { height: 44px; }
+.area-layout .control-panel .help-copy { display: none; }
+.area-layout .summary-panel { padding: 16px; }
+.area-layout .summary-panel { grid-column: auto; }
+.area-layout .summary-panel .panel-title { margin-bottom: 12px; }
+.area-layout .metric-card { padding: 10px 14px; }
+.area-layout .metric-value { display: inline-block; font-size: 30px; margin-right: 12px; }
+.area-layout .metric-label { display: inline-block; margin-top: 0; }
+.area-layout .metric-note { margin-top: 3px; }
+.area-layout .leaflet.html-widget { height: 760px !important; }
+.overview-tableau { margin-top: 8px; overflow-x: auto; }
+.overview-tableau tableau-viz { display: block; min-width: 390px; }
+@media (max-width: 900px) {
+  .area-layout { grid-template-columns: minmax(0, 1fr); }
+  .area-layout .leaflet.html-widget { height: 460px !important; }
+  .overview-tableau { max-width: 500px; margin: 8px auto 0; }
+}

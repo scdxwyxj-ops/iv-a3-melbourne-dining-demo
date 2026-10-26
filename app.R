@@ -2,7 +2,7 @@
 # See docs/STARTER_AI_USAGE.md. Four feature modules are placeholders, not a finished submission.
 library(shiny)
 
-required_packages <- c("shiny", "jsonlite")
+required_packages <- c("shiny", "jsonlite", "leaflet", "sf", "shinyjs")
 missing_packages <- required_packages[!vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)]
 if (length(missing_packages)) stop("Install these packages before starting: ", paste(missing_packages, collapse = ", "))
 
@@ -16,6 +16,7 @@ for (feature in c("area", "nearby", "compare", "shortlist")) {
 app_data <- load_app_data("data")
 
 ui <- fluidPage(
+  setUpTableauInShiny(),
   tags$head(
     tags$title("Melbourne Dining Explorer"),
     tags$meta(name = "viewport", content = "width=device-width, initial-scale=1"),
@@ -47,6 +48,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   # Every visitor gets a separate state object. Never create this globally.
   state <- create_shared_state(app_data)
+  tableau_area_server(input, session, state, app_data$areas)
   area_server("area", app_data, state)
   nearby_server("nearby", app_data, state)
   compare_server("compare", app_data, state)
