@@ -1,0 +1,118 @@
+.venue-card {
+  border-radius: 9px;
+}
+.venue-card-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 7px;
+}
+.venue-tag,
+.venue-data-tag {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 3px 7px;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.venue-tag {
+  color: #24665d;
+  background: #eaf4f0;
+}
+.venue-data-tag {
+  color: #697c73;
+  background: #f0f3f1;
+}
+.nearby-venue-address {
+  overflow-wrap: anywhere;
+}
+.nearby-offline-note {
+  color: #657970;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 6px 0 13px;
+}
+.venue-details {
+  color: #203b36;
+}
+.venue-detail-heading h3 {
+  margin: 12px 0 8px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+.venue-detail-heading p {
+  color: #667c72;
+  line-height: 1.6;
+}
+.venue-context {
+  color: #087f80 !important;
+}
+.venue-note {
+  color: #6b7d74;
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.venue-details [hidden] {
+  display: none !important;
+}
+.google-detail-status {
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #edf6f2;
+  color: #47695b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.google-venue-details[data-status='error'] .google-detail-status,
+.google-venue-details[data-status='not-configured'] .google-detail-status,
+.google-venue-details[data-status='empty'] .google-detail-status,
+.google-venue-details[data-status='limit'] .google-detail-status {
+  background: #fff7e9;
+  color: #745d38;
+}
+.google-match-heading h4 {
+  font-size: 14px;
+  margin: 17px 0 7px;
+}
+.google-match-heading p {
+  font-size: 12px;
+  color: #657970;
+  line-height: 1.6;
+}
+.google-place-host {
+  width: 100%;
+  max-width: 400px;
+  margin: 16px auto;
+}
+.google-place-host:empty {
+  margin: 0;
+}
+.google-place-host gmp-place-search,
+.google-place-host gmp-place-details {
+  display: block;
+  width: 100%;
+  max-height: 590px;
+  overflow-y: auto;
+  color-scheme: light;
+  --gmp-mat-color-primary: #087f80;
+  --gmp-mat-color-surface: #ffffff;
+  --gmp-mat-color-on-surface: #203b36;
+  --gmp-mat-color-on-surface-variant: #657970;
+  --gmp-mat-font-family: Arial, sans-serif;
+  border-radius: 9px;
+}
+.google-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 15px 0;
+}
+.google-detail-actions .btn {
+  font-size: 11px;
+  padding: 8px 10px;
+}
+.google-maps-link {
+  font-size: 12px;
+}

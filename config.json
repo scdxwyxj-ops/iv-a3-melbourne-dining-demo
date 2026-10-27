@@ -1,0 +1,109 @@
+{
+  "app": {
+    "host": "127.0.0.1",
+    "port": 43873,
+    "title": "Melbourne Dining Explorer"
+  },
+  "defaults": {
+    "area": "Carlton",
+    "nearby_landmark": "Federation Square",
+    "comparison_a": "Federation Square",
+    "comparison_b": "State Library Victoria"
+  },
+  "nearby": {
+    "radius_min_m": 200,
+    "radius_max_m": 1200,
+    "radius_default_m": 600,
+    "radius_step_m": 100,
+    "chart": {
+      "plot_left": 65,
+      "plot_right": 596,
+      "plot_top": 28,
+      "plot_bottom": 282,
+      "plot_width": 531,
+      "plot_height": 250,
+      "hit_height": 254,
+      "view_width": 620,
+      "view_height": 350
+    }
+  },
+  "compare": {
+    "radius_min_m": 200,
+    "radius_max_m": 1200,
+    "radius_default_m": 600,
+    "radius_step_m": 1
+  },
+  "route": {
+    "default_stops": ["State Library Victoria", "Federation Square", "NGV International"],
+    "max_stops": 8,
+    "radius_min_m": 100,
+    "radius_max_m": 1200,
+    "radius_default_m": 300,
+    "radius_step_m": 50,
+    "target_default": 0.5,
+    "weights": {
+      "balanced": {
+        "detour": 0.65,
+        "position": 0.35
+      },
+      "least_detour": {
+        "detour": 0.85,
+        "position": 0.15
+      },
+      "meal_position": {
+        "detour": 0.4,
+        "position": 0.6
+      }
+    }
+  },
+  "map": {
+    "palette": {
+      "primary": "#087f80",
+      "secondary": "#7961b0",
+      "takeaway": "#db8950",
+      "shared": "#203b36",
+      "landmark": "#24313a",
+      "selection": "#db963c",
+      "route": "#486b8a"
+    },
+    "provider": {
+      "name": "OpenStreetMap",
+      "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
+      "maxZoom": 19
+    }
+  },
+  "google": {
+    "browser_key": "AIzaSyC7LEE-F6FSebV_yJP4M8RlpDlMheNSbYc",
+    "request_limit": 20,
+    "sdk_timeout_ms": 15000,
+    "query_timeout_ms": 15000
+  },
+  "tableau": {
+    "url": "https://public.tableau.com/views/Overview_diningvenues/OverviewCharts",
+    "area_aliases": {
+      "West Melbourne (Industrial)": "West Melbourne (Ind.)",
+      "West Melbourne (Residential)": "West Melbourne (Res.)"
+    }
+  },
+  "data": {
+    "snapshot_date": "2026-10-11",
+    "expected_counts": {
+      "venues": 1994,
+      "landmark_records": 242,
+      "clue_areas": 13
+    },
+    "details_coverage": {
+      "fresh_objects": 344,
+      "matched": 380,
+      "cuisine": 229,
+      "website": 119,
+      "opening_hours": 125,
+      "phone": 103,
+      "wheelchair": 112,
+      "outdoor_seating": 109,
+      "vegetarian": 21,
+      "vegan": 15
+    }
+  }
+}

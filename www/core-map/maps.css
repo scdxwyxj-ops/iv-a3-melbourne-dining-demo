@@ -1,0 +1,177 @@
+.core-map,
+.core-map-adapter {
+  background: #edf2ee;
+  font-family: Arial, sans-serif;
+}
+.leaflet-container .core-map-icon {
+  background: transparent;
+  border: 0;
+}
+.core-map-marker {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: var(--marker-color, #087f80);
+  color: white;
+  font:
+    700 11px/1 Arial,
+    sans-serif;
+  box-shadow: 0 1px 5px #203b3650;
+}
+.core-map-marker[data-role='landmark'] {
+  border-width: 3px;
+  font-size: 13px;
+}
+.core-map-marker.is-selected {
+  outline: 3px solid var(--map-selection);
+  outline-offset: 2px;
+  box-shadow: 0 2px 9px #203b3660;
+}
+.core-map-marker[data-role='cluster'] {
+  font-size: 11px;
+}
+.core-map .leaflet-popup-content-wrapper,
+.core-map-adapter .leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  color: #203b36;
+}
+.core-map .leaflet-popup-content,
+.core-map-adapter .leaflet-popup-content {
+  margin: 14px 17px;
+  font:
+    12px/1.6 Arial,
+    sans-serif;
+}
+.core-map .leaflet-control-zoom,
+.core-map-adapter .leaflet-control-zoom {
+  border: 1px solid #dce6e0;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #203b3625;
+}
+.core-map .leaflet-control-zoom a,
+.core-map-adapter .leaflet-control-zoom a {
+  color: #203b36;
+  text-decoration: none;
+  background: white;
+}
+.core-map .leaflet-control-attribution,
+.core-map-adapter .leaflet-control-attribution {
+  font:
+    10px/1.5 Arial,
+    sans-serif;
+  background: #fffffff0;
+  color: #4e665c;
+}
+.core-map .leaflet-control-attribution a,
+.core-map-adapter .leaflet-control-attribution a {
+  color: #087f80;
+}
+.core-map .leaflet-control-scale-line,
+.core-map-adapter .leaflet-control-scale-line {
+  border-color: #60776d;
+  color: #203b36;
+  font-family: Arial, sans-serif;
+}
+.core-map .core-map-message,
+.core-map-adapter .core-map-message {
+  position: absolute;
+  z-index: 700;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff8e7;
+  color: #674a17;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  max-width: 85%;
+}
+.core-popup-title {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.core-popup-line {
+  margin: 3px 0;
+}
+.core-venue-choice {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  margin: 5px 0;
+  border: 1px solid #dce6e0;
+  border-radius: 6px;
+  background: white;
+  color: #203b36;
+  text-align: left;
+  font: inherit;
+}
+.core-venue-choice:hover,
+.core-venue-choice[aria-pressed='true'] {
+  background: #edf6f4;
+  border-color: var(--map-primary);
+}
+.compare-map-legend .category-legend {
+  margin: 0;
+}
+.core-map-label {
+  color: #203b36;
+  background: white;
+  border: 1px solid #dce6e0;
+  border-radius: 7px;
+  padding: 7px 10px;
+  font:
+    600 12px/1.4 Arial,
+    sans-serif;
+}
+.category-legend .legend-dot.cafe {
+  background: var(--map-primary);
+}
+.category-legend .legend-dot.takeaway {
+  background: var(--map-takeaway);
+}
+.nearby-module .nearby-origin-key > span {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  color: white;
+  background: var(--map-landmark);
+  font-size: 8px;
+}
+.compare-page .compare-map-legend .key-a {
+  color: var(--map-primary);
+}
+.compare-page .compare-map-legend .key-b {
+  color: var(--map-secondary);
+}
+.compare-page .compare-map-legend .key-shared {
+  color: var(--map-shared);
+}
+.live-page .map-legend .legend-dot.landmark {
+  background: var(--map-landmark);
+  border-radius: 50%;
+  transform: none;
+}
+.live-page .map-legend .legend-dot.restaurant {
+  background: var(--map-primary);
+}
+.live-page .map-legend .legend-dot.selection {
+  background: var(--map-primary);
+  outline: 2px solid var(--map-selection);
+  outline-offset: 1px;
+}
+body .core-map.leaflet-container .leaflet-control-zoom,
+body .core-map-adapter.leaflet-container .leaflet-control-zoom {
+  border: 1px solid #dce6e0;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px #203b3625;
+  margin-bottom: 10px;
+}
