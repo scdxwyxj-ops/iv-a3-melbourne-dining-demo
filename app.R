@@ -58,7 +58,7 @@ ui <- fluidPage(
     tabsetPanel(
       id = "main_nav",
       type = "pills",
-      selected = "nearby",
+      selected = "area",
       tabPanel("1 · Area overview", value = "area", area_ui("area", app_data)),
       tabPanel(
         "2 · Near a landmark",
